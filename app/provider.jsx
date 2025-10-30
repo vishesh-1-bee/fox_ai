@@ -1,18 +1,27 @@
 import React from 'react'
 import { ThemeProvider as NextThemesProvider } from "next-themes"
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { Appsidebar } from './_components/Appsidebar'
 const Provider = ({
     children,
     ...props
 }) => {
     return (
-        <NextThemesProvider 
-         attribute="class"
+
+        <NextThemesProvider
+            attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
-        {...props}>
-           <div>{children}</div>
+            {...props}>
+            <SidebarProvider>
+                <Appsidebar/>
+                <SidebarTrigger/>
+                
+                <div>{children}</div></SidebarProvider >
         </NextThemesProvider>
+
+
     )
 }
 

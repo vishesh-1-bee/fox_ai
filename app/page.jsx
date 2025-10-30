@@ -8,9 +8,7 @@ const page = () => {
   return (
     <div>
       <h1 >we are here</h1> 
-    
-     <Button onClick={()=>setTheme('light')}  >Light Mode</Button>
-     <Button onClick={()=>setTheme('dark')} >Dark Mode</Button>
+  
     </div>
   )
 }
