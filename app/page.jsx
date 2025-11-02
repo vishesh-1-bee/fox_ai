@@ -2,13 +2,13 @@
 import { Button } from '@/components/ui/button'
 import { useTheme } from 'next-themes'
 import React from 'react'
+import Chatbox from './_components/Chatbox'
 
 const page = () => {
   const { setTheme } = useTheme()
   return (
-    <div>
-      <h1 >we are here</h1> 
-  
+    <div className=''>
+<Chatbox/>
     </div>
   )
 }

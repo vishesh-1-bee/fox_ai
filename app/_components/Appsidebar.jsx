@@ -7,7 +7,7 @@ import {
     SidebarGroup,
     SidebarHeader,
 } from "@/components/ui/sidebar"
-import { Moon, Sun } from "lucide-react"
+import {  Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import Image from "next/image"
 
@@ -46,9 +46,9 @@ export function Appsidebar() {
             </SidebarContent>
             <SidebarFooter >
                 <div className="p-3 mb-6">
-                    <Button className='w-full py-2' size="large">SignIn/SignUp</Button>
-                    
+                    <Button className='w-full py-2' size="large">SignIn/SignUp</Button>                   
                 </div>
+                
             </SidebarFooter>
         </Sidebar>
     )
