@@ -64,11 +64,15 @@ const AiModels = () => {
               item.enable ? "max-h-[470px] opacity-100" : "max-h-0 opacity-0"
             }`}
           >
-            <div className="overflow-y-auto h-[470px] hide-scrollbar border-t border-gray-200 dark:border-gray-700 pt-3">
+            {item.premium &&  item.enable ? (
+                <div className='border-t pt-3 flex justify-center items-center'>Upgrad to unlock</div>
+            )
+        : (<div className="overflow-y-auto h-[470px] hide-scrollbar border-t border-gray-200 dark:border-gray-700 pt-3">
               {Array.from({ length: 25 }).map((_, i) => (
                 <h1 key={i}>hellow</h1>
               ))}
-            </div>
+            </div>)}
+            
           </div>
         </div>
       ))}

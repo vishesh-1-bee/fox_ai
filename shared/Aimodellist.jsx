@@ -58,7 +58,7 @@
     {
         model: "Cohere",
         icon: "/cohere.png",
-        premium: false,
+        premium: true,
         enable: true,
         submodel: [
         { name: "Cohere Command A", premium: false, id: "cohere-command-a" },
