@@ -23,11 +23,11 @@ const AiModels = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-4 overflow-x-auto hide-scrollbar p-4">
+    <div className="flex flex-col  lg:flex-row gap-4 overflow-x-auto hide-scrollbar p-4">
       {aimodel.map((item, index) => (
         <div
           key={index}
-          className="p-4 rounded-xl border border-gray-200 dark:border-gray-700 w-96 shrink-0 transition-all duration-300 bg-white dark:bg-gray-900 dark:text-white shadow-sm"
+          className="p-4 max-sm:w-full  rounded-xl border border-gray-200 dark:border-gray-700 w-96  shrink-0 transition-all duration-300 bg-white dark:bg-gray-900 dark:text-white shadow-sm"
         >
           {/* Header */}
           <div className="flex items-center justify-between mb-3">
@@ -61,7 +61,7 @@ const AiModels = () => {
           {/* Content */}
           <div
             className={`transition-all duration-300 overflow-hidden ${
-              item.enable ? "max-h-[470px] opacity-100" : "max-h-0 opacity-0"
+              item.enable ? "max-h-[470px] opacity-100 " : "max-h-0 opacity-0"
             }`}
           >
             {item.premium &&  item.enable ? (
