@@ -13,7 +13,7 @@ const Chatbox = () => {
             </div>
 
             {/* box for the prompt box*/}
-            <div className='fixed bottom-0 flex left-0 justify-center w-full px-4 pb-7  '>
+            <div className='fixed bottom-0 flex left-0 justify-center w-full px-4 pb-7 mt-4 '>
                 <div className='w-full border rounded-2xl shadow-2xl max-w-2xl bg-slate-100 '>
                     <input type='textbox' placeholder='Ask me anything .....' className='dark:text-black mt-1 border-0 pl-2 outline-none' />
                     <div className='flex justify-between items-center'>
