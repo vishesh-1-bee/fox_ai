@@ -39,9 +39,10 @@ export function Appsidebar() {
                         <h5 className="text-sm font-semibold">+New Chat</h5>
                     </Button>
                         :
-                        <Button size='large' className="w-full py-2 ">
+                        <div><Button size='large' className="w-full py-2 ">
                             <SignInButton mode="modal"></SignInButton>
-                            </Button>
+                            </Button></div>
+                        
                     }
 
                 </div>
