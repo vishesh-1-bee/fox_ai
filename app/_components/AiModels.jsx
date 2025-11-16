@@ -10,6 +10,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from '@/components/ui/switch';
+import { SelectGroup, SelectLabel } from '@radix-ui/react-select';
+import { Lock } from 'lucide-react';
 
 const AiModels = () => {
   const [aimodel, setaimodel] = useState(Aimodellist);
@@ -23,11 +25,11 @@ const AiModels = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-4 overflow-x-auto hide-scrollbar p-4">
+    <div className="flex flex-col  lg:flex-row gap-4 overflow-x-auto hide-scrollbar p-4">
       {aimodel.map((item, index) => (
         <div
           key={index}
-          className="p-4 rounded-xl border border-gray-200 dark:border-gray-700 w-96 shrink-0 transition-all duration-300 bg-white dark:bg-gray-900 dark:text-white shadow-sm"
+          className="p-4 max-sm:w-full  rounded-xl border border-gray-200 dark:border-gray-700 w-96  shrink-0 transition-all duration-300 bg-white dark:bg-gray-900 dark:text-white shadow-sm"
         >
           {/* Header */}
           <div className="flex items-center justify-between mb-3">
@@ -43,11 +45,22 @@ const AiModels = () => {
                     <SelectValue placeholder={item.submodel[0].name} />
                   </SelectTrigger>
                   <SelectContent>
-                    {item.submodel.map((models, i) => (
-                      <SelectItem key={i} value={models.name}>
-                        {models.name}
-                      </SelectItem>
-                    ))}
+                    <SelectGroup>
+                      <SelectLabel>Free</SelectLabel>
+                      {item.submodel.map((models, i) => models.premium == false && (
+                        <SelectItem key={i} value={models.name}>
+                          {models.name}
+                        </SelectItem>
+                      ))}</SelectGroup>
+
+
+                      <SelectGroup className='pt-3'>
+                      <SelectLabel className='text-sm text-gray-400'>Premiun</SelectLabel>
+                      {item.submodel.map((models, i) => models.premium == true && (
+                        <SelectItem key={i} value={models.name} disabled={models.premium}>
+                          {models.name} {models.premium && <Lock className='h-1 w-1'/>}
+                        </SelectItem>
+                      ))}</SelectGroup>
                   </SelectContent>
                 </Select>
               )}
@@ -60,19 +73,18 @@ const AiModels = () => {
 
           {/* Content */}
           <div
-            className={`transition-all duration-300 overflow-hidden ${
-              item.enable ? "max-h-[470px] opacity-100" : "max-h-0 opacity-0"
-            }`}
+            className={`transition-all duration-300 overflow-hidden ${item.enable ? "max-h-[470px] opacity-100 " : "max-h-0 opacity-0"
+              }`}
           >
-            {item.premium &&  item.enable ? (
-                <div className='border-t pt-3 flex justify-center items-center'>Upgrad to unlock</div>
+            {item.premium && item.enable ? (
+              <div className='border-t pt-3 flex justify-center items-center'>Upgrad to unlock</div>
             )
-        : (<div className="overflow-y-auto h-[470px] hide-scrollbar border-t border-gray-200 dark:border-gray-700 pt-3">
-              {Array.from({ length: 25 }).map((_, i) => (
-                <h1 key={i}>hellow</h1>
-              ))}
-            </div>)}
-            
+              : (<div className="overflow-y-auto h-[470px] hide-scrollbar border-t border-gray-200 dark:border-gray-700 pt-3">
+                {Array.from({ length: 25 }).map((_, i) => (
+                  <h1 key={i}>hellow</h1>
+                ))}
+              </div>)}
+
           </div>
         </div>
       ))}
