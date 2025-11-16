@@ -10,7 +10,7 @@ const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: "aifox-ccbae.firebaseapp.com",
   projectId: "aifox-ccbae",
-  storageBucket: "aifox-ccbae.firebasestorage.app",
+  storageBucket: "aifox-ccbae.appspot.com",
   messagingSenderId: "585695803561",
   appId: "1:585695803561:web:ca1b4ee915d2c75df911b8",
   measurementId: "G-Z051W96QHL"
@@ -18,7 +18,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app, 'default')
+export const db = getFirestore(app)
 
 
 

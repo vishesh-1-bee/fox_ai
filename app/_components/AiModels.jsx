@@ -10,6 +10,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from '@/components/ui/switch';
+import { SelectGroup, SelectLabel } from '@radix-ui/react-select';
+import { Lock } from 'lucide-react';
 
 const AiModels = () => {
   const [aimodel, setaimodel] = useState(Aimodellist);
@@ -43,11 +45,22 @@ const AiModels = () => {
                     <SelectValue placeholder={item.submodel[0].name} />
                   </SelectTrigger>
                   <SelectContent>
-                    {item.submodel.map((models, i) => (
-                      <SelectItem key={i} value={models.name}>
-                        {models.name}
-                      </SelectItem>
-                    ))}
+                    <SelectGroup>
+                      <SelectLabel>Free</SelectLabel>
+                      {item.submodel.map((models, i) => models.premium == false && (
+                        <SelectItem key={i} value={models.name}>
+                          {models.name}
+                        </SelectItem>
+                      ))}</SelectGroup>
+
+
+                      <SelectGroup className='pt-3'>
+                      <SelectLabel className='text-sm text-gray-400'>Premiun</SelectLabel>
+                      {item.submodel.map((models, i) => models.premium == true && (
+                        <SelectItem key={i} value={models.name} disabled={models.premium}>
+                          {models.name} {models.premium && <Lock className='h-1 w-1'/>}
+                        </SelectItem>
+                      ))}</SelectGroup>
                   </SelectContent>
                 </Select>
               )}
@@ -60,19 +73,18 @@ const AiModels = () => {
 
           {/* Content */}
           <div
-            className={`transition-all duration-300 overflow-hidden ${
-              item.enable ? "max-h-[470px] opacity-100 " : "max-h-0 opacity-0"
-            }`}
+            className={`transition-all duration-300 overflow-hidden ${item.enable ? "max-h-[470px] opacity-100 " : "max-h-0 opacity-0"
+              }`}
           >
-            {item.premium &&  item.enable ? (
-                <div className='border-t pt-3 flex justify-center items-center'>Upgrad to unlock</div>
+            {item.premium && item.enable ? (
+              <div className='border-t pt-3 flex justify-center items-center'>Upgrad to unlock</div>
             )
-        : (<div className="overflow-y-auto h-[470px] hide-scrollbar border-t border-gray-200 dark:border-gray-700 pt-3">
-              {Array.from({ length: 25 }).map((_, i) => (
-                <h1 key={i}>hellow</h1>
-              ))}
-            </div>)}
-            
+              : (<div className="overflow-y-auto h-[470px] hide-scrollbar border-t border-gray-200 dark:border-gray-700 pt-3">
+                {Array.from({ length: 25 }).map((_, i) => (
+                  <h1 key={i}>hellow</h1>
+                ))}
+              </div>)}
+
           </div>
         </div>
       ))}

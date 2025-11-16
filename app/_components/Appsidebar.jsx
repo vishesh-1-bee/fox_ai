@@ -39,10 +39,10 @@ export function Appsidebar() {
                         <h5 className="text-sm font-semibold">+New Chat</h5>
                     </Button>
                         :
-                        <div><Button size='large' className="w-full py-2 ">
+                        <div size='large' className="w-full py-2 ">
                             <SignInButton mode="modal"></SignInButton>
-                            </Button></div>
-                        
+                        </div>
+
                     }
 
                 </div>
@@ -52,9 +52,9 @@ export function Appsidebar() {
                     <div className="mt-8">
                         <h1 className="text-lg font-bold">Chat</h1>
                         {user ? "" :
-                        <p className="text-sm font-extralight mt-2 text-slate-500">Sign in to start chating with multiple AI model</p>
+                            <p className="text-sm font-extralight mt-2 text-slate-500">Sign in to start chating with multiple AI model</p>
                         }
-                       
+
                     </div>
                 </SidebarGroup >
             </SidebarContent>
