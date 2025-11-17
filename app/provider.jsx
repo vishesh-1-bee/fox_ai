@@ -7,7 +7,7 @@ import Headerr from './_components/Headerr'
 import { useUser } from '@clerk/nextjs'
 import { doc, getDoc, getDocFromCache, setDoc } from 'firebase/firestore'
 import { db } from '@/config/Firebaseconfif'
-import Aicontext from './context/Aicontext'
+import {Aicontext} from './context/Aicontext'
 import { DefaultModel } from '@/shared/Modeldata'
 const Provider = ({
     children,
@@ -30,6 +30,8 @@ const Provider = ({
 
         if (usersanp.exists()) {
             console.log("user already exists");
+            const userprefrencemodel= usersanp.data()
+            setaimodels(userprefrencemodel?.selectedModel)
             return;
         } else {
             const userdata = {

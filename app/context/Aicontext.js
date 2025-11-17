@@ -1,3 +1,4 @@
+"use client"
 import { createContext } from "react";
 
-export default aimodelcontext= createContext()
+export const Aicontext= createContext()
