@@ -1,7 +1,7 @@
 "use client";
 import Aimodellist from '@/shared/Aimodellist';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -12,9 +12,16 @@ import {
 import { Switch } from '@/components/ui/switch';
 import { SelectGroup, SelectLabel } from '@radix-ui/react-select';
 import { Lock } from 'lucide-react';
+import { Aicontext } from '../context/Aicontext';
+import { useUser } from '@clerk/nextjs';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '@/config/Firebaseconfif';
+
 
 const AiModels = () => {
+  const { user } = useUser()
   const [aimodel, setaimodel] = useState(Aimodellist);
+  const { aimodels, setaimodels } = useContext(Aicontext)
 
   const ontoggle = (model, value) => {
     setaimodel(prev =>
@@ -23,6 +30,21 @@ const AiModels = () => {
       )
     );
   };
+
+  //function for the chaning the selected ai model
+  const onSelectValue = async (parentModel, value) => {
+    setaimodels(prev => ({
+      ...prev,
+      [parentModel]: {
+        modelId: value
+      }
+    }))
+    const docRef = doc(db, "users", user?.primaryEmailAddress?.emailAddress);
+    await updateDoc(docRef, {
+      selectedModel: aimodels
+    })
+  }
+  //storing it in the firebase database
 
   return (
     <div className="flex flex-col  lg:flex-row gap-4 overflow-x-auto hide-scrollbar p-4">
@@ -40,25 +62,26 @@ const AiModels = () => {
 
             <div className="flex items-center gap-2">
               {item.enable && (
-                <Select>
+                <Select defaultValue={aimodels[item.model].modelId} onValueChange={(value) => onSelectValue(item.model, value)}
+                disabled={item.premium}>
                   <SelectTrigger className="w-[150px]">
-                    <SelectValue placeholder={item.submodel[0].name} />
+                    <SelectValue placeholder={aimodels[item.model].modelId} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Free</SelectLabel>
                       {item.submodel.map((models, i) => models.premium == false && (
-                        <SelectItem key={i} value={models.name}>
+                        <SelectItem key={i} value={models.id}>
                           {models.name}
                         </SelectItem>
                       ))}</SelectGroup>
 
 
-                      <SelectGroup className='pt-3'>
+                    <SelectGroup className='pt-3'>
                       <SelectLabel className='text-sm text-gray-400'>Premiun</SelectLabel>
                       {item.submodel.map((models, i) => models.premium == true && (
                         <SelectItem key={i} value={models.name} disabled={models.premium}>
-                          {models.name} {models.premium && <Lock className='h-1 w-1'/>}
+                          {models.name} {models.premium && <Lock className='h-1 w-1' />}
                         </SelectItem>
                       ))}</SelectGroup>
                   </SelectContent>
